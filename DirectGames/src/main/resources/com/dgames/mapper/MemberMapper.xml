@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.MemberMapper">
+
+<select id="idCheck" parameterType="String" resultType="String">
+		SELECT 
+			dgm_id 
+		FROM 
+			dg_member 
+		WHERE 
+			dgm_id = #{dgm_id}
+	</select>
+	
+	<insert id="regist" parameterType="com.dgames.domain.MemberVO">
+		INSERT INTO 
+			dg_member(
+				dgm_id, 
+				dgm_name, 
+				dgm_email, 
+				dgm_password, 
+				dgm_zipcode, 
+				dgm_addr, 
+				dgm_dtaddr, 
+				dgm_phone
+			)
+    	VALUES(
+    		#{dgm_id},
+    		#{dgm_name},
+    		#{dgm_email},
+    		#{dgm_password},
+    		#{dgm_zipcode},
+    		#{dgm_addr},
+    		#{dgm_dtaddr},
+    		#{dgm_phone}
+   		)
+	</insert>
+	
+	<select id="login" parameterType="String" resultType="com.dgames.domain.MemberVO">
+		SELECT 
+			dgm_id, 
+			dgm_name, 
+			dgm_email, 
+			dgm_password, 
+			dgm_zipcode, 
+			dgm_addr, 
+			dgm_dtaddr, 
+			dgm_phone, 
+			dgm_point, 
+			dgm_lastlogin,
+			dgm_datesub, 
+			dgm_updatedate
+		FROM 
+			dg_member 
+		WHERE 
+			dgm_id = #{dgm_id}
+	</select>
+	
+	<!-- 회원 수정 -->
+	<update id="modify" parameterType="com.dgames.domain.MemberVO">
+		UPDATE 
+			dg_member
+	    SET 
+		    dgm_email = #{dgm_email}, 
+		    dgm_zipcode = #{dgm_zipcode}, 
+		    dgm_addr = #{dgm_addr}, 
+		    dgm_dtaddr = #{dgm_dtaddr}, 
+		    dgm_phone = #{dgm_phone},    
+		    dgm_updatedate = sysdate
+		WHERE 
+			dgm_id = #{dgm_id}
+	</update>
+	
+	<!-- 최근 로그인 시간 갱신 -->
+	<update id="loginTimeUpdate" parameterType="String">
+		UPDATE
+			dg_member
+		SET
+			dgm_lastlogin = sysdate
+		WHERE
+			dgm_id = #{dgm_id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="delete" parameterType="String">
+		
+		DELETE FROM
+			dg_member
+		WHERE
+			dgm_id = #{dgm_id}
+		
+	</delete>
+
+</mapper>

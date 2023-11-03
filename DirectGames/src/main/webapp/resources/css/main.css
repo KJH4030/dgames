@@ -1,0 +1,550 @@
+@import url(common.css);
+
+/* -------- 모바일용 CSS ------- */
+
+body{
+    background: #fffcda;
+}
+.search_area{
+    display: none;
+}
+.copyright2{
+    display: none;
+}
+/*로고*/
+.header{
+	position:relative;
+	width:100%;
+}
+.header .logo img{
+	width:110px;
+	height:auto;
+}
+.header .logo{
+    margin-top:7px;
+	margin-left:7px;
+}
+.util{
+    display: none;
+}
+/* 토글 버튼 */
+.menu_toggle_btn{  
+	display:block;
+	text-indent:-9999px;
+	width:40px;
+	height:34px;
+	position:absolute;
+	top:0px;
+	right:10px;
+	background: url(../image/menu_toggle_btn.png) no-repeat;
+	cursor:pointer;
+}
+
+/* 내비게이션 메뉴(세로 정렬) */
+
+.nav{
+	margin-top:10px;
+	width:97%;
+}
+.nav .gnb{
+	display:none;
+	padding-left:10px;
+}
+.nav .gnb li:hover{
+	background:#6f4e43;
+}
+.nav .gnb li a{
+	display:block;
+	padding:5px;
+	font-size:1.125em;
+	font-weight:bold;
+	color:#333;
+}
+.nav .gnb li a:hover{
+    color:#fff;
+}
+.nav2{
+    display: none;
+}
+
+/*헤더이미지*/
+.mvisual{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 47%;
+}
+.mvisual_in{
+    margin: 0 auto;
+}
+.visual li {
+    position: absolute;
+    width: 100%;
+    top: 0;
+	display: none;
+}
+.visual>li>img{
+	width:100%;
+	max-width:100%;
+	height:auto;
+	vertical-align:bottom;
+}
+.visual li.list0 {
+	display: block;
+}
+/*버튼*/
+.mvisual .btn_area { 
+	position: absolute;
+    bottom: 7%;
+    width: 100%;
+    text-align: center;
+}
+.mvisual .btn_area > span {
+	display: inline-block;
+	width: 3vw;  
+	height: 3vw;
+	border-radius: 50%;
+	background-color: #fff;
+	cursor: pointer;
+    margin:0 1%;
+}
+.mvisual .btn_area > span.active { 
+	background-color: #6f4e43;
+}
+.mvisual .btn_area > span span {
+	display: inline-block;
+	text-indent: -9999px;
+}
+
+/* 공지사항 */
+
+.info{
+	width:90%;
+	margin:0 auto;
+}
+.news{
+	padding:0 10px;  /*20/320*100=6.25%*/
+    background: #fcf8c3;
+}
+.info-main h2{   /*공지사항 제목*/
+    font-family: 'NanumSquare';
+	margin-top:10px;
+	margin-bottom:5px;
+	font-size:1.125em; /*18px*/
+	font-size:1.125rem;
+	color:#6f4e43;
+    text-align: center;
+}
+.news li a{
+	display:block;
+	padding:10px 5px;
+	border-bottom:solid 1px #6f4e43;
+	color:#000;
+	font-size:0.875em;  /*14px*/
+	font-size:0.875rem;
+}
+.news li:last-child a{
+    border-bottom: none;
+}
+.news li a:hover{background:#6f4e43; color:#fff;}
+
+.news a:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+.news .text{
+	float:none;
+	width:auto;
+	margin-left:5px;
+}
+
+.promo{
+    display: none;
+}
+
+/*배너*/
+
+.banner{
+    margin: 0 auto;
+}
+.banner h2{   /*배너 제목*/
+    font-family: 'NanumSquare';
+	margin-top:10px;
+	font-size:1.125em; /*18px*/
+	font-size:1.125rem;
+	color:#6f4e43;
+    text-align: center;
+}
+
+.banner_in{
+    text-align: center;
+}
+.banner_in img{
+    box-shadow: 0px 0px 2px #000;
+    margin: 10px 5px;
+}
+/*맨위로가기*/
+#top_btn{
+    display: table;
+    width: 100%;
+    height: 50px;
+    background: #ff9c60;
+    text-align: center;
+    transition: all 0.4s;
+}
+#top_btn:hover{
+    
+    opacity: 0.7;
+}
+#top_btn a{
+    display: table-cell;        
+    vertical-align: middle;
+}
+
+/*푸터*/
+
+.footer{
+    width: 100%;
+    height: 80px;
+    background: #6f4e43;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.copyright p{
+    color: #402d26;
+	font-size:0.750em;  /*14px*/
+	font-size:0.750rem;
+}
+
+/* -------- 태블릿용 CSS ------- */
+
+@media all and (min-width:768px){
+    
+    .header .logo{
+        float: left;
+        margin-top: 7px;
+        margin-bottom:10px;
+    }
+    .header .logo img{
+        width: 120px;
+    }
+    
+    .menu_toggle_btn{  
+        display:none;
+    }
+    .nav{
+        float: left;
+        width:80%;
+        margin-top: 11px;
+    }
+    .nav .gnb{
+        display:block;
+        margin-left: 10%;
+    }
+    .gnb li{
+        float: left;
+        padding:0 3%;
+    }
+    .nav .gnb li:hover{
+        background:#6f4e43;
+    }
+    .nav .gnb li a{
+        color: #464646;
+    }
+    .nav .gnb li a:hover{
+        color:#fff;
+    }
+    
+/*    공지사항*/
+    
+    
+    .info{
+        width: 40%;
+        margin:0 auto;
+        float: left;
+    }
+    .info-main{
+        width: 100%;
+        margin:0 10px;
+    }
+    .news{
+        width: 90%;
+        box-shadow: 0px 0px 2px #000;
+    }
+    .info-main h2{   /*공지사항 제목*/
+        text-align: left;
+    }
+/*   프로모션*/
+    .promo{
+        float: left;
+        width: 57%;
+        display: block;
+        margin-left: 10px;
+    }
+    .promo>a>img{
+        width: 100%;
+        height: 184px;
+        box-shadow: 0px 0px 2px #000;
+    }
+    .promo h2{
+        font-family: 'NanumSquare';
+        margin-top:10px;
+        margin-bottom:5px;
+        font-size:1.125em; /*18px*/
+        font-size:1.125rem;
+        color:#6f4e43;
+    }
+    
+    
+/*    컨텐츠 배너*/
+    .banner{
+        clear: both;
+        padding-top: 7px;
+    }
+    .banner_in img{
+        box-shadow: 0px 0px 2px #000;
+        margin: 10px 3px;
+        width: 245px;
+    }
+    
+/*    버튼 크기*/
+    .mvisual .btn_area > span {
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+	
+}
+
+
+/* -------- PC용 CSS ------- */
+
+@media all and (min-width:1190px){
+    
+    .nav{
+        display: none;
+    }
+    #wrap{
+        width: 940px;
+        margin: 0 auto;
+    }
+    .header{
+        height: 100px;
+        position: relative;
+/*        background: yellow;*/
+    }
+/*    검색창영역*/
+    .header .search_area{
+        display: block;
+        padding-top: 30px;
+        float: left;
+    }
+    .header .search{
+        width: 236px;
+        height: 36px;
+        display: block;
+        float: left;
+        border-radius: 3px 0 0 3px;
+        border: 2px solid #c6aa79;
+        background:#6f4e43;
+        padding-left: 10px;
+        font-size: 16px;
+        color: #fff;
+    }
+    
+/*    로고*/
+    .header .logo{
+        float: none;
+        padding-top: 30px;
+        margin-top:0px;
+        margin-bottom:0px;
+        margin-left: 45%;
+        width: 159px;
+        height: 45px;
+    }
+    .header .logo img{
+        width: 159px;
+        height: 45px;
+    }
+/*    유틸메뉴*/
+    .util{
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 40%;
+    }
+    .util img{
+        padding-left:10px;
+        transition: all 0.4s;
+    }
+    .util img:hover{
+        opacity: 0.7;
+    }
+/*    네비영역*/
+    .nav2{
+        display: block;
+        float: left;
+        width: 250px;
+        height: 320px;
+    }
+    .nav2 ul li{
+        display: table;
+        width: 250px;
+        height: 63px;
+        border-bottom: 1px solid #fffcda;
+        background: #6f4e43;
+        text-align: center;
+        transition: all 0.4s;
+    }    
+    .nav2 ul li:hover{
+        opacity: 0.7;
+    }
+    .nav2 ul li:last-child{
+        border-bottom: 1px solid #6f4e43;
+    }
+    .nav2 ul li a{
+        font-family: 'Gautami';
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 18px;
+        font-weight: 600;
+        color: #fffcda;
+    }
+/*    비주얼 영역*/
+    .mvisual{
+        position: relative;
+        width: 690px;
+        height: 320px;
+        padding-bottom: 0;
+        float: left;
+    }
+    .mvisual_in{
+        margin: 0 auto;
+    }
+    .visual li {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        display: none;
+    }
+    .visual>li>img{
+        width:100%;
+        max-width:100%;
+        height:auto;
+        vertical-align:bottom;
+    }
+    
+/*    버튼 크기*/
+    .mvisual .btn_area > span {
+        width: 11px;
+        height: 11px;
+    }
+    /*    공지사항*/
+    
+    .info{
+        width: 255px;
+        float: left;
+        margin-right: 87px;
+    }
+    .news{
+        width: 255px;
+        height: 200px;
+        margin-left: -10px;
+        box-shadow: 0px 0px 2px #000;
+    }
+    .news ul li{
+        height: 40px;
+    }
+    .news ul li a{
+        padding: 12px;
+    }
+    .info-main h2{   /*공지사항 제목*/
+        text-align: center;
+        font-weight: 900;
+    }
+/*   프로모션*/
+    .promo{
+        width: 598px;
+        float: left;
+        display: block;
+        margin-left: 0px;
+    }
+    .promo a>img{
+        display: block;
+        width: 598px;
+        height: 200px;
+        box-shadow: 0px 0px 2px #000;
+        
+    }
+    .promo h2{
+        font-family: 'NanumSquare';
+        margin-top:10px;
+        margin-bottom:5px;
+        font-size:1.125em; /*18px*/
+        font-size:1.125rem;
+        color:#6f4e43;
+        text-align: center;
+        font-weight: 900;
+    }
+    
+    
+/*    컨텐츠 배너*/
+    
+    .banner{
+        margin: 0 auto;
+    }
+
+    .banner_in{
+        float: left;
+        margin-bottom: 10px;
+    }
+    .banner_in a img{
+        margin-left:75px;
+    }
+    .banner_in a:first-child img{
+        margin-left:22px;
+    }
+    .banner_in a:last-child img{
+        margin-right:20px;
+    }
+    .banner h2{
+        text-align: left;
+        font-weight: 900;
+        margin-top: 10px;
+    }
+    
+/*    탑버튼 가리기*/
+    #top_btn{
+        display: none;
+    }
+/*    푸터*/
+    .footer{
+        width: 100%;
+    }
+    .copyright{
+        display: none;        
+    }
+    .copyright2{
+        display: block;
+        text-align: center;
+    }
+    .copyright2 p{
+        font-family: 'NanumSquare';
+        color: #fff;
+        font-weight: bold;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin-top: 5px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
