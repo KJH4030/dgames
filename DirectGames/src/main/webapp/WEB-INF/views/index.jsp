@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -26,8 +27,12 @@
             </div>
             
             <div class="util">
-                <a href="/member/login"><img src="/resources/image/login.png" alt="로그인"></a>
+            	<c:if test="${sessionScope.loginStatus == null}">
+            	<a href="/member/login"><img src="/resources/image/login.png" alt="로그인"></a>
+    			</c:if>
+                <c:if test="${sessionScope.loginStatus != null}">
                 <a href="/member/logout"><img src="/resources/image/logout.png" alt="로그아웃"></a>
+                </c:if>                
                 <a href="/member/regist"><img src="/resources/image/regist.png" alt="회원가입"></a>
                 <a href="#"><img src="/resources/image/cart.png" alt="장바구니"></a>
             </div>

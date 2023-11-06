@@ -24,6 +24,18 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberMapper.regist(vo);
 	}
+
+	@Override
+	public MemberVO login(String dgm_id) {
+		
+		return memberMapper.login(dgm_id);
+	}
+
+	@Override
+	public void modify(MemberVO vo) {
+		
+		memberMapper.modify(vo);
+	}
 	
 	
 }
