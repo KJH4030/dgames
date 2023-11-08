@@ -78,10 +78,22 @@
       </div>
       <div class="form-group row">
         <label for="dgm_email" class="col-2">이메일</label>
-        <div class="col-8">
-          <input type="email" class="form-control" id="dgm_email" name="dgm_email" placeholder="이메일 입력">
+        <div class="col-4">
+          <input type="email" class="form-control" id="email1" name="email1" placeholder="이메일 입력">
+        </div>  
+        <div class="col-2">
+          <input type="text" class="form-control" id="email2" name="email2" placeholder="이메일 입력">
         </div>
         <div class="col-2">
+          <select id="email3" class="form-control">
+            <option>메일주소선택</option>
+            <option value="gmail.com">gmail</option>
+            <option value="naver.com">naver</option>
+            <option value="kakao.com">kakao</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <input type="hidden" id="dgm_email" name="dgm_email"><!-- mail1 과 mail2 주소를 합쳐서 dgm_email로 -->
           <button type="button" class="btn btn-outline-info" id="mailAuth">메일 인증</button>
         </div>
       </div>
@@ -235,6 +247,7 @@
 <%@ include file="/WEB-INF/views/comm/plugin.jsp" %>
 
 <script>
+	
 
 	//정규표현식
     var reg_name = RegExp(/^[가-힣]{2,10}$/);
@@ -247,16 +260,17 @@
     // 입력필드 태그참조 변수
     let dgm_name = document.getElementById('dgm_name');
     let dgm_id = document.getElementById('dgm_id');
-    let dgm_password = document.getElementById('dgm_pw');
+    let dgm_password = document.getElementById('dgm_password');
+    let dgm_password2 = document.getElementById('dgm_password2');
     let dgm_email = document.getElementById('dgm_email');
-    let dgm_email1= document.getElementById('dgm_email1');
-    let dgm_email2= document.getElementById('dgm_email2');
+    let email1= document.getElementById('email1');
+    let email2= document.getElementById('email2');
     let dgm_phone = document.getElementById('dgm_phone');
     let sample2_postcode = document.getElementById('sample2_postcode');
     let sample2_address = document.getElementById('sample2_address');
     let sample2_detailAddress = document.getElementById('sample2_detailAddress');
 	
-    
+
 
 
 
@@ -267,6 +281,7 @@
 	// 별칭 : $ -> jQuery()함수
 	//ready()이벤트 메소드 : 브라우저가 html 태그를 모두 읽고 난 후 동작하는 특징.
 	$(document).ready(function(){
+		
 		// document.getElementById("idCheck");
 		// $("CSS 선택자")
 		$("#idCheck").click(function() {
@@ -298,9 +313,9 @@
 
 		// 메일인증 요청
     $("#mailAuth").click(function() {
-
+        dgm_email.value = email1.value + "@" + email2.value;
       //if($("메일입력텍스트박스태그"))
-      if($("#dgm_email").val() == ""){
+      if($("#dgm_email").val() == "@"){
         alert("이메일을 입력하세요.");
         $("#dgm_email").focus();
         return;				
@@ -376,44 +391,51 @@
 
 
 
-      //정규식 검사
+    //--------------정규식 검사--------------------
       
-    if(!empty_validate(dgm_name, "이름 입력요망")) return;
-    if(!reg_validate(reg_name,dgm_name,"이름은 한글만 사용 가능합니다"))return;
-
-    if(!empty_validate(dgm_id, "아이디 입력요망")) return;
+    if(!empty_validate(dgm_id, "아이디를 입력해주세요")) return;
     if(!reg_validate(reg_id,dgm_id,"아이디는 영문 및 숫자만 사용 가능합니다"))return;
 
-    if(!empty_validate(dgm_pw, "비밀번호 입력요망")) return;
-    if(!reg_validate(reg_pw,dgm_pw,"비밀번호는 영문소문자, 숫자, 특수문자를 혼합 사용합니다"))return;
+    if(!empty_validate(dgm_password, "비밀번호를 입력해주세요")) return;
+    if(!reg_validate(reg_password,dgm_password,"비밀번호는 영문소문자, 숫자, 특수문자를 혼합 사용합니다"))return;
 
-    // if(dgm_pw.value != dgm_repw.value){
-    //     alert("비밀번호 확인이 틀립니다")
-    // dgm_repw.value = "";
-    // return;
-    // }
+    if(!empty_validate(dgm_password2, "비밀번호 확인을 입력해주세요")) return;
+    if(dgm_password.value != dgm_password2.value){
+        alert("비밀번호 확인이 틀립니다")
+    	dgm_password2.value = "";
+    return;
+    }
+    
+    if(!empty_validate(dgm_name, "이름을 입력해주세요")) return;
+    if(!reg_validate(reg_name,dgm_name,"이름은 한글만 사용 가능합니다"))return;
+     
 
     if(!empty_validate(email1, "메일을 입력하세요")) return;
-    if(!empty_validate(email2, "메일을 입력하세요")) return;
-    // if(!reg_email(reg_email,email1,"메일 주소를 정확히 입력해주세요"))return;
-
-    if(!empty_validate(stel, "휴대전화번호를 입력하세요")) return;
+    if(!empty_validate(email2, "도메인을 입력하세요")) return;
+    dgm_email.value = email1.value + "@" + email2.value;
+    if(!reg_validate(reg_email,dgm_email,"메일 주소를 정확히 입력해주세요"))return;
 
     if(!empty_validate(sample2_postcode, "우편번호를 입력하세요")) return;
     if(!empty_validate(sample2_address, "기본주소를 입력하세요")) return;
     if(!empty_validate(sample2_detailAddress, "상세주소를 입력하세요")) return;
+
+    if(!empty_validate(dgm_phone, "휴대전화번호를 입력하세요")) return;
     
-    email.value = email1.value + "@" + email2.vaule;
 
-    let rev_mail = document.getElementById('rev_mail');
-    let rev_sms = document.getElementById('rev_sms');
-
+    //let rev_mail = document.getElementById('rev_mail');
+    //let rev_sms = document.getElementById('rev_sms');
+    
+    //console.log("dgm_email : " + dgm_email.value)
+    
+      joinForm.submit();
+    });
 
     // 필드에 데이터 입력 유무 체크
     // target : 검사할 필드의 태그참조
     // msg : 경고메세지. 예>이름입력요망, 비밀번호 입력요망
     function empty_validate(target,msg){
-        
+        console.log(target.value);
+        console.log("합친 이메일 주소 : " + dgm_email.value);
         if(target.value == ""){
             alert(msg);
             target.focus();
@@ -435,10 +457,13 @@
         return true;
     }
 
+    //이메일 셀렉트 태그 선택 시 적용
+    document.getElementById('email3').addEventListener('change',emailSelect);
+    function emailSelect(){
+                let email2 = document.getElementById("email2");
+                email2.value = document.getElementById('email3').value;
+            }
 
-
-  		joinForm.submit();
-    });
 });
 	
 </script>    

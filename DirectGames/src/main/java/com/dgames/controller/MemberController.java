@@ -38,6 +38,8 @@ public class MemberController {
 		
 		log.info("아이디 : " + dgm_id);
 		
+		
+		
 		ResponseEntity<String> entity = null;
 		
 		//서비스 메서드 호출 구문 작업
@@ -55,7 +57,9 @@ public class MemberController {
 	@PostMapping("/regist")
 	public String regist(MemberVO vo, RedirectAttributes rttr) {
 		
-		log.info("회원정보 : " + vo);
+		//log.info("회원정보 : " + vo);
+		
+		System.out.println("회원정보  : " + vo);
 		
 		vo.setDgm_password(passwordEncoder.encode(vo.getDgm_password()));
 		
