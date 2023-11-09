@@ -1,38 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-      <div class="col-12 col-md">
-        <small class="d-block mb-3 text-muted">© 2017-2022</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Features</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Cool stuff</a></li>
-          <li><a class="text-muted" href="#">Random feature</a></li>
-          <li><a class="text-muted" href="#">Team feature</a></li>
-          <li><a class="text-muted" href="#">Stuff for developers</a></li>
-          <li><a class="text-muted" href="#">Another one</a></li>
-          <li><a class="text-muted" href="#">Last time</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Resources</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Resource</a></li>
-          <li><a class="text-muted" href="#">Resource name</a></li>
-          <li><a class="text-muted" href="#">Another resource</a></li>
-          <li><a class="text-muted" href="#">Final resource</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="#">Team</a></li>
-          <li><a class="text-muted" href="#">Locations</a></li>
-          <li><a class="text-muted" href="#">Privacy</a></li>
-          <li><a class="text-muted" href="#">Terms</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+<link rel="stylesheet" href="/resources/css/main.css"> 
+    <footer class="footer">
+        <div class="copyright">
+            <p>DIRECT GAMES</p>
+            <p>서울특별시 강서구 가양동 1498 강서한강자이타워 A동 605호</p>
+            <p>(주)에이치투 인터렉티브</p>
+            <p>Copyright &copy; All Right Reserved.</p>
+        </div>
+        <div class="copyright2">
+            <p>DIRECT GAMES | 소재지 : 서울특별시 강서구 가양동 1498 강서한강자이타워 A동 605호 (주)에이치투 인터렉티브 | 대표이사 : 허준하 | 개인정보관리책임자 : 김지훈<br>
+            사업자등록번호 : 206-86-35756 | 통신판매업신고 : 2013-서울강서-0758 | 고객센터 : 02-6968-5550 | 전자우편 : directg@h2interactive.co.kr<br>
+            Copyright © DIRECT GAMES. All Rights Reserved.</p>
+        </div>
+    </footer>
