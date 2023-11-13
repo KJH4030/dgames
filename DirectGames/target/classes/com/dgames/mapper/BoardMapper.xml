@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.BoardMapper">
+	
+	<insert id="ntc_regist" parameterType="com.dgames.domain.NoticeVO">
+		INSERT INTO 
+			dg_notice(
+				ntc_id,
+				ntc_title, 
+				ntc_content,
+				ntc_views) 
+		VALUES(
+			seq_ntc_id.NEXTVAL,
+			#{ntc_title},
+			#{ntc_content},
+			1)
+	
+	</insert>
+	
+</mapper>
