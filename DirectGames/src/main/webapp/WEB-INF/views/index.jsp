@@ -42,7 +42,7 @@
                 <ul class="gnb clear">
                     <li><a href="#">SERVICE</a></li>
                     <li><a href="#">GAME</a></li>
-                    <li><a href="/board/ntc_list">SUPPORT</a></li>
+                    <li><a href="/board/notice/ntc_list">SUPPORT</a></li>
                     <li><a href="#">EVENT</a></li>
                     <li><a href="#">PROMOTION</a></li>
                 </ul>
@@ -53,7 +53,7 @@
         <ul class="gnb2 clear">
             <li><a href="#">SERVICE</a></li>
             <li><a href="#">GAME</a></li>
-            <li><a href="/board/ntc_list">SUPPORT</a></li>
+            <li><a href="/board/notice/ntc_list">SUPPORT</a></li>
             <li><a href="#">EVENT</a></li>
             <li><a href="#">PROMOTION</a></li>
         </ul>

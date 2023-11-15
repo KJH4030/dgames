@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgames.mapper.BoardMapper">
 	
+	<!-- 공지사항 게시글 작성 -->
 	<insert id="ntc_regist" parameterType="com.dgames.domain.NoticeVO">
 		INSERT INTO 
 			dg_notice(
@@ -18,5 +19,95 @@
 			1)
 	
 	</insert>
+	
+	<!-- 공통된 sql구문작업 : 검색조건 -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							ntc_title like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'C'.toString()">
+							ntc_content like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	
+	</sql>
+	
+	<!-- 공지사항 게시판 목록 페이지포함 -->
+	<select id="ntc_list" resultType="com.dgames.domain.NoticeVO" parameterType="com.dgames.dto.Criteria">
+		<![CDATA[
+		SELECT 
+    		ntc_id, 
+    		ntc_cat, 
+    		ntc_title, 
+    		ntc_content, 
+    		ntc_regdate, 
+    		ntc_mdfdate, 
+    		ntc_up_folder, 
+    		ntc_img, 
+    		ntc_views 
+		FROM 
+		    (
+		    SELECT /*+INDEX_DESC(dg_notice pk_ntc_id) */
+		    	rownum rn,
+		    	ntc_id, 
+	    		ntc_cat, 
+	    		ntc_title, 
+	    		ntc_content, 
+	    		ntc_regdate, 
+	    		ntc_mdfdate, 
+	    		ntc_up_folder, 
+	    		ntc_img, 
+	    		ntc_views
+	    	FROM
+	    		dg_notice
+	    	WHERE
+	    	]]>
+	    	<include refid="criteria"></include>
+	    	
+	    	<![CDATA[
+	    		rownum <= #{pageNum} * #{amount}
+	    	)
+	    WHERE
+	    	rn > (#{pageNum} -1) * #{amount} 
+	    	]]>
+	</select>
+	
+	<!-- 공지사항 게시글 갯수 -->
+	<select id="ntc_count" parameterType="com.dgames.dto.Criteria" resultType="int">	
+		SELECT
+			count(*)
+		FROM
+			dg_notice
+		WHERE
+		<include refid="criteria"></include>
+		
+		ntc_id > 0
+	</select>			
+	
+	<!-- 공지사항 게시글 읽기 -->
+	<select id="ntc_get" parameterType="Long" resultType="com.dgames.domain.NoticeVO">
+		
+		SELECT 
+    		ntc_id, 
+    		ntc_cat, 
+    		ntc_title, 
+    		ntc_content, 
+    		ntc_regdate, 
+    		ntc_mdfdate,
+    		ntc_up_folder,
+    		ntc_img, 
+    		ntc_views 
+		FROM 
+			dg_notice
+		WHERE
+			ntc_id =#{ntc_id}
+	</select>
 	
 </mapper>

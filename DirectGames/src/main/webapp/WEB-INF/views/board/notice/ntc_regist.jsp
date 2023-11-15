@@ -62,7 +62,7 @@
 						<h3 class="box-title mt-5">글쓰기</h3>
 					</div>
 					<!-- 절대경로 /board/register -->
-					<form role="form" method="post" action="/board/ntc_regist">
+					<form role="form" method="post" action="/board/notice/ntc_regist">
 						<div class="box-body">
 						<div class="form-group">
 						<label for="ntc_title">제목</label>
