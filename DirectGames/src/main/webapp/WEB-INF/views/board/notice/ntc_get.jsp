@@ -40,6 +40,29 @@
           font-size: 3.5rem;
         }
       }
+
+	.leading {
+	    background: transparent;
+	    border: 1px solid rgba(0,0,0,0.25);
+	    box-shadow: 0 0 1px rgba(255,255,255,0.25) inset;
+	    position: relative;
+	    -webkit-transition: box-shadow 350ms;
+	    -o-transition: box-shadow 350ms;
+	    transition: box-shadow 350ms;
+	    margin-bottom: 40px;
+	    padding: 32px;
+	}
+	.article-title {
+	    margin: 0 0 10px 0;
+	    color: #000000;
+	    font-size: 16px;
+	}
+	.article-asides{
+		font-size: 13px;
+	}
+	.box{
+		font-size: 14px;
+	}
     </style>
 
     
@@ -57,52 +80,59 @@
 <main role="main" class="flex-shrink-0">
   <div class="container">
     <section>
-    	<div class="row">
-    		<div class="col-md-12">
+    	<div class="row ">
+    		<div class="leading col-12">
     			<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title mt-5">Get</h3>
+						<h1 class="article-title" id="ntc_title">
+							${notice.ntc_title }
+						</h1>
 					</div>
 					
-						<div class="box-body">
-							<div class="form-group">
-								<label for="ntc_id">Bno</label>
-								<input type="text" class="form-control" name="ntc_id" id="ntc_id" value="${notice.ntc_id }" readonly>
-							</div>
-							<div class="form-group">
-								<label for="ntc_title">Title</label>
-								<input type="text" class="form-control" name="ntc_title" id="ntc_title" value="${notice.ntc_title }" readonly>
-							</div>
-							<div class="form-group">
-								<label>Content</label>
-								<textarea class="form-control" rows="3" name="ntc_content" readonly>${notice.ntc_content }</textarea>
-							</div>
-							<div class="form-group">
-								<label for="ntc_regdate">regdate</label>
-								<input type="text" class="form-control" name="ntc_regdate" id="ntc_regdate" value='<fmt:formatDate value="${notice.ntc_regdate }" pattern="yyyy/MM/dd" />' readonly>
-							</div>
-							<div class="form-group">
-								<label for="ntc_mdfdate">updateddate</label>
-								<input type="text" class="form-control" name="ntc_mdfdate" id="ntc_mdfdate" value='<fmt:formatDate value="${notice.ntc_mdfdate }" pattern="yyyy/MM/dd" />' readonly>
-							</div>
+					<!-- Aside -->
+					<aside class="article-aside clearfix">
+						<input type="hidden" class="form-control" name="ntc_id" id="ntc_id" value="${notice.ntc_id }" readonly>	
+						<dl class="article-info  muted">							
+							<dd class="createdby hasTooltip">
+								<i class="fa fa-user"></i>
+								<span >작성자 : 다이렉트 게임즈</span>
+							</dd>
+							<dd class="category-name hasTooltip">
+								<i class="fa fa-folder-open"></i>
+								<span>${notice.ntc_cat }</span>
+							</dd>
+							<dd class="published hasTooltip">
+								<i class="fa fa-calendar"></i>
+								<span>작성일 : ${notice.ntc_regdate }</span>
+							</dd>
+							<dd class="hits">
+								<i class="fa fa-eye"></i>
+								<span>조회수 : ${notice.ntc_views }</span>											
+							</dd>	
+						</dl>
+					</aside>  
+					<!-- //Aside -->
+					
+						<div class="clearfix">
+								<div class="" name="ntc_content">${notice.ntc_content }</div>
 						</div>
-						
-						<div class="box-footer">
-						<!-- Modify, Delete,  List 버튼클릭시 아래 form태그를 전송 -->
-						<form id="curListInfo" action="" method="get">
-							<input type="hidden" name="pageNum" id="pageNum" value="${cri.pageNum}" />
-							<input type="hidden" name="amount"  id="amount" value="${cri.amount}" />
-							<input type="hidden" name="type" id="type" value="${cri.type}" />
-							<input type="hidden" name="keyword" id="keyword" value="${cri.keyword}" />
-							<input type="hidden" name="ntc_id" id="ntc_id" value="${notice.ntc_id }" />
-						</form>	
-						<button type="button" id="btn_modify" class="btn btn-primary">Modify</button>
-						<button type="button" id="btn_delete" class="btn btn-primary">Delete</button>
-						<button type="button" id="btn_list" class="btn btn-primary">List</button>
-						</div>
-
-				</div>
-    		</div>
+					</div>	
+					
+					
+					<div class="box-footer text-right">
+					<!-- Modify, Delete,  List 버튼클릭시 아래 form태그를 전송 -->
+					<form id="curListInfo" action="" method="get">
+						<input type="hidden" name="pageNum" id="pageNum" value="${cri.pageNum}" />
+						<input type="hidden" name="amount"  id="amount" value="${cri.amount}" />
+						<input type="hidden" name="type" id="type" value="${cri.type}" />
+						<input type="hidden" name="keyword" id="keyword" value="${cri.keyword}" />
+						<input type="hidden" name="ntc_id" id="ntc_id" value="${notice.ntc_id }" />
+					</form>	
+					<button type="button" id="btn_modify" class="btn btn-primary">Modify</button>
+					<button type="button" id="btn_delete" class="btn btn-primary">Delete</button>
+					<button type="button" id="btn_list" class="btn btn-primary">List</button>
+					</div>	
+    		</div>	
     	</div>
     </section>
   </div>
@@ -122,7 +152,7 @@
 
   	function fn_modify() {
 
-		curListInfo.setAttribute("action", "/board/modify");
+		curListInfo.setAttribute("action", "/board/notice/ntc_modify");
 		curListInfo.submit();
   	}
 
@@ -133,7 +163,7 @@
 
 		if(!confirm("삭제를 하시겠읍니까?")) return;
 		//페이지(주소) 이동 
-		curListInfo.setAttribute("action", "/board/delete");
+		curListInfo.setAttribute("action", "/board/notice/ntc_delete");
 		curListInfo.submit();
   	}
 
@@ -142,7 +172,7 @@
 
   	function fn_list() {
 
-		curListInfo.setAttribute("action", "/board/list");
+		curListInfo.setAttribute("action", "/board/notice/ntc_list");
 		curListInfo.submit();
   	}
   </script> 

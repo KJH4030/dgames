@@ -102,7 +102,7 @@
 	         toolbarCanCollapse : true,
 	         removePlugins : "elementspath", 
 	         //업로드 탭기능추가 속성. CKEditor에서 파일업로드해서 서버로 전송클릭하면 , 이 주소가 동작된다.
-	         filebrowserUploadUrl: '/admin/product/imageUpload'
+	         filebrowserUploadUrl: '/board/notice/ntc_imageUpload'
 		}
 
 		CKEDITOR.replace("ntc_content", ckeditor_config);
@@ -110,7 +110,7 @@
 		console.log("ckeditor 버전 : ", CKEDITOR.version);
 		
 
-		$("#")
+		
 	});
 </script>
   </body>
