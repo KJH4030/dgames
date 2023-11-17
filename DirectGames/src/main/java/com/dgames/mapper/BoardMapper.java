@@ -14,4 +14,6 @@ public interface BoardMapper {
 	int ntc_count(Criteria cri);
 	
 	NoticeVO ntc_get(Long ntc_id);
+	
+	public void ntc_modify(NoticeVO notice);
 }

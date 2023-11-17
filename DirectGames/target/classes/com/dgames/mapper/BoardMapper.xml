@@ -110,4 +110,8 @@
 			ntc_id =#{ntc_id}
 	</select>
 	
+	<update id="ntc_modify" parameterType="com.dgames.domain.NoticeVO">
+	
+		UPDATE dg_notice SET ntc_title = #{ntc_title}, CONTENT = #{ntc_content}, ntc_mdfdate = SYSDATE WHERE ntc_id = #{ntc_id}
+	</update>	
 </mapper>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dgames.domain.NoticeVO;
 import com.dgames.dto.Criteria;
@@ -142,14 +143,21 @@ public class BoardController {
 	}
 	
 	//공지사항 게시글 읽기
-	@GetMapping("/notice/ntc_get")
-	public void get(@RequestParam("ntc_id") Long ntc_id, @ModelAttribute("cri") Criteria cri,  Model model) {
+	@GetMapping({"/notice/ntc_get", "/notice/ntc_modify"})
+	public void ntc_get(@RequestParam("ntc_id") Long ntc_id, @ModelAttribute("cri") Criteria cri,  Model model) {
 		
 		log.info("게시물 번호 :" + ntc_id);
 		log.info("페이지, 검색 정보 :" + cri);
 		
 		NoticeVO notice = boardService.ntc_get(ntc_id);
 		model.addAttribute("notice",notice);
+	}
+	
+	//공지사항 게시글 수정
+	@PostMapping("notice/ntc_modify")
+	public String ntc_modify(NoticeVO notice, Criteria cri, RedirectAttributes rttr) {
+		
+		return "";
 	}
 	
 }
