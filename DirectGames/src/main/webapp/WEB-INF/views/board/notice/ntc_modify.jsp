@@ -63,14 +63,20 @@
 					</div>
 					<!-- 절대경로 /board/register -->
 					<form role="form" method="post" action="/board/notice/ntc_modify">
+					
+						<input type="hidden" name="pageNum" id="pageNum" value="${cri.pageNum}" />
+						<input type="hidden" name="amount"  id="amount" value="${cri.amount}" />
+						<input type="hidden" name="type" id="type" value="${cri.type}" />
+						<input type="hidden" name="keyword" id="keyword" value="${cri.keyword}" />
+						<input type="hidden" name="ntc_id" id="ntc_id" value="${notice.ntc_id }" />						
 						<div class="box-body">
+							<div class="form-group">
+								<label for="ntc_title">제목</label>
+								<input type="text" class="form-control" name="ntc_title" id="ntc_title" placeholder="제목 입력..." value="${notice.ntc_title }">
+							</div>
 						<div class="form-group">
-						<label for="ntc_title">제목</label>
-						<input type="text" class="form-control" name="ntc_title" id="ntc_title" placeholder="제목 입력..." value="${notice.ntc_title }">
-						</div>
-						<div class="form-group">
-						<label>내용</label>
-						<textarea class="form-control" rows="3" name="ntc_content" id="ntc_content" placeholder="내용입력...." >${notice.ntc_content }</textarea>
+							<label>내용</label>
+							<textarea class="form-control" rows="3" name="ntc_content" id="ntc_content" placeholder="내용입력...." >${notice.ntc_content }</textarea>
 						</div>
 						</div>
 						

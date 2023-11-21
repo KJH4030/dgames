@@ -103,7 +103,7 @@
 							</dd>
 							<dd class="published hasTooltip">
 								<i class="fa fa-calendar"></i>
-								<span>작성일 : ${notice.ntc_regdate }</span>
+								<span>작성일 : ${notice.ntc_mdfdate }</span>
 							</dd>
 							<dd class="hits">
 								<i class="fa fa-eye"></i>
@@ -161,7 +161,7 @@
 
   	function fn_delete() {
 
-		if(!confirm("삭제를 하시겠읍니까?")) return;
+		if(!confirm("삭제 하시겠습니까?")) return;
 		//페이지(주소) 이동 
 		curListInfo.setAttribute("action", "/board/notice/ntc_delete");
 		curListInfo.submit();

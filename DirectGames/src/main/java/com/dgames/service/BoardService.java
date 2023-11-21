@@ -7,12 +7,17 @@ import com.dgames.dto.Criteria;
 
 public interface BoardService {
 
-	void ntc_regist(NoticeVO noticeVO);
+	Long ntc_regist(NoticeVO noticeVO);
+	
 
 	List<NoticeVO> ntc_list(Criteria cri);
 	
 	int ntc_count(Criteria cri);
 
 	NoticeVO ntc_get(Long ntc_id);
+
+	public void ntc_modify(NoticeVO notice);
+	
+	public void ntc_delete(Long ntc_id);
 	
 }

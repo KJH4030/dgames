@@ -17,9 +17,11 @@ public class BoardServiceImpl implements BoardService {
 	private final BoardMapper boardMapper;
 
 	@Override
-	public void ntc_regist(NoticeVO noticeVO) {
+	public Long ntc_regist(NoticeVO noticeVO) {
 
 		boardMapper.ntc_regist(noticeVO);
+		return boardMapper.get_ntc_id();
+		
 	}
 
 	@Override
@@ -38,6 +40,20 @@ public class BoardServiceImpl implements BoardService {
 	public NoticeVO ntc_get(Long ntc_id) {
 
 		return boardMapper.ntc_get(ntc_id);
+	}
+
+	@Override
+	public void ntc_modify(NoticeVO notice) {
+
+		boardMapper.ntc_modify(notice);
+		
+	}
+
+	@Override
+	public void ntc_delete(Long ntc_id) {
+		
+		boardMapper.ntc_delete(ntc_id);
+		
 	}
 	
 }

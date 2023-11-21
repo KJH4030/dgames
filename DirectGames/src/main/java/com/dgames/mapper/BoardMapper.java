@@ -8,6 +8,8 @@ import com.dgames.dto.Criteria;
 public interface BoardMapper {
 
 	void ntc_regist(NoticeVO noticeVO);
+	
+	Long get_ntc_id();
 
 	List<NoticeVO> ntc_list(Criteria cri);
 	
@@ -16,4 +18,8 @@ public interface BoardMapper {
 	NoticeVO ntc_get(Long ntc_id);
 	
 	public void ntc_modify(NoticeVO notice);
+	
+	public void ntc_delete(Long ntc_id);
+	
+	
 }

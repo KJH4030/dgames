@@ -54,9 +54,10 @@ public class BoardController {
 	@PostMapping("/notice/ntc_regist")
 	public String ntc_Regist(NoticeVO noticeVO) {
 		
-		boardService.ntc_regist(noticeVO);
+		/* boardService.ntc_regist(noticeVO); */
+		Long ntc_id = boardService.ntc_regist(noticeVO);
 		
-		return "redirect:/board/notice/ntc_list";
+		return "redirect:/board/notice/ntc_get?ntc_id="+ntc_id;
 	}
 	
 	//공지사항 이미지 등록
@@ -154,10 +155,22 @@ public class BoardController {
 	}
 	
 	//공지사항 게시글 수정
-	@PostMapping("notice/ntc_modify")
-	public String ntc_modify(NoticeVO notice, Criteria cri, RedirectAttributes rttr) {
+	@PostMapping("/notice/ntc_modify")
+	public String ntc_modify(NoticeVO notice, Criteria cri) {
 		
-		return "";
+		System.out.println("게시글 정보 : " + notice);
+		boardService.ntc_modify(notice);
+		Long ntc_id = notice.getNtc_id();
+		
+		return "redirect:/board/notice/ntc_get" + cri.getListLink()+"&ntc_id="+ntc_id;
+	}
+	
+	@GetMapping("/notice/ntc_delete")
+	public String ntc_delete(Criteria cri, Long ntc_id) {
+		
+		boardService.ntc_delete(ntc_id);
+		
+		return "redirect:/board/notice/ntc_list" + cri.getListLink();
 	}
 	
 }

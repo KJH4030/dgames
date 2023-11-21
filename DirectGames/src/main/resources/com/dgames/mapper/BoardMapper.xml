@@ -16,9 +16,11 @@
 			seq_ntc_id.NEXTVAL,
 			#{ntc_title},
 			#{ntc_content},
-			1)
-	
+			1)	
 	</insert>
+	<select id="get_ntc_id" resultType="Long">
+		select seq_ntc_id.CURRVAL from dual
+	</select>
 	
 	<!-- 공통된 sql구문작업 : 검색조건 -->
 	<sql id="criteria">
@@ -112,6 +114,25 @@
 	
 	<update id="ntc_modify" parameterType="com.dgames.domain.NoticeVO">
 	
-		UPDATE dg_notice SET ntc_title = #{ntc_title}, CONTENT = #{ntc_content}, ntc_mdfdate = SYSDATE WHERE ntc_id = #{ntc_id}
+		UPDATE 
+			dg_notice 
+		SET 
+			ntc_title = #{ntc_title},
+			ntc_content = #{ntc_content}, 
+			ntc_mdfdate = SYSDATE
+		WHERE 
+			ntc_id = #{ntc_id}
+		
 	</update>	
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="ntc_delete" parameterType="Long">
+		
+		DELETE FROM
+			dg_notice
+		WHERE 
+			ntc_id = #{ntc_id}
+		
+	</delete>
+	
 </mapper>
