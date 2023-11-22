@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimun-scale=1.0, user-scalable=no">
 <title>다이렉트게임즈</title>
-<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="stylesheet" href="/css/main/main.css">
 <!-- HTML5와 미디어쿼리를 지원하지 않는 IE8 이하 버전을 위해 -->
 <!-- [if lt IE 9]>
 	<script src="js/html5shiv/html5shiv.min.js"></scirpt>
@@ -118,7 +118,7 @@
     
     
 <!-- 제이쿼리 라이브러리 선언 -->
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.1.0.min.js"/>"></script>
-<script src="/resources/js/main.js"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery-3.1.0.min.js"/>"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

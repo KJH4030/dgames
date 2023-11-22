@@ -84,7 +84,8 @@ desired effect
 							</form>
 						</div>
 						<table class="table table-bordered">
-							<tbody><tr>
+							<tbody>
+							<tr>
 								<th style="width: 10%">글번호</th>
 								<th style="width: 10%">구분</th>
 								<th style="width: 50%">제목</th>
@@ -98,8 +99,9 @@ desired effect
 								<td>									
 									<a class="move pro_name" href="#" data-ntc_id="${noticeVO.ntc_id }">${noticeVO.ntc_title }</a>
 								</td>
-								<td><fmt:formatDate value="${noticeVO.ntc_regdate }" pattern="yyyy-MM-dd" /></td>															</tr>
+								<td><fmt:formatDate value="${noticeVO.ntc_regdate }" pattern="yyyy-MM-dd" /></td>
 								<td>${noticeVO.ntc_views }</td>
+							</tr>								
 							</c:forEach>
 							</tbody>
 						</table>

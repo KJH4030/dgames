@@ -31,16 +31,18 @@ public class AdminController {
 		
 		System.out.println("admin Login..");
 		
-		return "/admin/adLogin";
+		return "/admin/ad_login";
 	}
 	
 	//관리자 로그인 인증
 	@PostMapping("/admin_ok")
 	public String admin_ok(AdminVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
 		
-		log.info("관리자 로그인 : " + vo);
+		System.out.println("관리자 로그인 : " + vo);
 		
 		AdminVO db_vo = adminService.admin_ok(vo.getAdmin_id());
+		
+		System.out.println("db_vo : " + db_vo);
 		
 		String url = "";
 		String msg = "";
@@ -55,16 +57,16 @@ public class AdminController {
 				//로그인 시간 업데이트
 				adminService.login_date(vo.getAdmin_id());
 				
-				url = "/admin/admin_menu"; // 관리자 메뉴페이지 주소
+				url = "/admin/ad_menu"; // 관리자 메뉴페이지 주소
 			}else {
 				url = "/admin/intro";
-				msg = "비밀번호가 일치하지 않습니다.";
+				msg = "failPW";
 				rttr.addFlashAttribute("msg",msg); // 로그인폼 jsp 파일에서 사용 목적
 			}
 		}else {
 			//아이디가 일치하지 않는 경우
 			url = "/admin/intro";
-			msg = "아이디가 일치하지 않습니다.";
+			msg = "failID";
 			rttr.addFlashAttribute("msg",msg); // 로그인폼 jsp 파일에서 사용 목적
 		}
 		
@@ -83,10 +85,10 @@ public class AdminController {
 	}
 	
 	//관리자 메뉴 페이지
-	@GetMapping("/admin_menu")
+	@GetMapping("/ad_menu")
 	public void admin_menu() {
 		
-		log.info("admin_menu..");
+		
 	}
 	
 	

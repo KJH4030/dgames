@@ -8,14 +8,14 @@
 		SELECT
 			admin_id, admin_pw, admin_visit_date
 		FROM
-			admin_tbl
+			dg_admin_acc
 		WHERE
 			admin_id = #{admin_id}		
 	</select>
 	
 	<update id="login_date" parameterType="String">
 		UPDATE
-			admin_tbl
+			dg_admin_acc
 		SET
 			admin_visit_date = sysdate
 		WHERE

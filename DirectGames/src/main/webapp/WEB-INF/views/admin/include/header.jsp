@@ -9,7 +9,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin </b>DocMall</span>
+      <span class="logo-lg"><b>Admin </b>DirectGames</span>
     </a>
 
     <!-- Header Navbar -->
@@ -22,7 +22,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
-              <a href="/">[DocMall]</a>
+              <a href="/">[DirectGames]</a>
           </li>
           <li>
               <a href="#">최근접속시간 : [<fmt:formatDate value="${sessionScope.adminStatus.admin_visit_date }" pattern="yyyy-MM-dd hh시-mm분-ss초"/>]</a>
