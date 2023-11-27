@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dgames.domain.GameVO;
+import com.dgames.service.AdCategoryService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,6 +22,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/admin/game/*")
 @RequiredArgsConstructor
 public class AdGameController {
+	
+	private final AdCategoryService adCategoryService;
 	
 	//메인 및 썸네일 이미지 업로드 폴더경로 주입작업
 	@Resource(name="uploadPath") //servlet-context.xml bean id참조
@@ -33,7 +36,6 @@ public class AdGameController {
 	//상품등록 폼
 	@GetMapping("/game_insert")
 	public void game_insert() {		
-		System.out.println("상품등록 폼..");		
 	}
 	
 	//파일이 여러개일 경우 List<MultipartFile> 감싸줘야 함

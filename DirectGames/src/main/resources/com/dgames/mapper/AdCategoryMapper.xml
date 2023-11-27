@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.AdCategoryMapper">
+	
+	<select id="getGenre" resultType="com.dgames.domain.GenreVO">	
+		SELECT 
+			GENRE_CODE,
+			GENRE_NAME 
+		FROM 
+			GENRE_TBL
+	</select>
+	<select id="getPlatform" resultType="com.dgames.domain.PlatformVO">	
+		SELECT 
+			PLATFORM_CODE,
+			PLATFORM_NAME 
+		FROM 
+			PLATFORM_TBL
+	</select>
+	<select id="getPublisher" resultType="com.dgames.domain.PublisherVO">	
+		SELECT 
+			PUBLISHER_CODE,
+			PUBLISHER_NAME 
+		FROM 
+			PUBLISHER_TBL
+	</select>
+</mapper>

@@ -67,50 +67,61 @@ desired effect
 					</div>
 					<!-- 절대경로 /board/register -->
 					<!-- <input type="file" 파일 업로드 시 enctype 필수 -->
-					<form role="form" method="post" action="/admin/product/pro_insert" enctype="multipart/form-data">
+					<form role="form" method="post" action="/admin/game/game_insert" enctype="multipart/form-data">
 						<div class="box-body">
 						<div class="form-group row">
-							<label for="title" class="col-sm-2">카테고리</label>
-							<div class="col-sm-3">
-							    <select class="form-control" id="firstCategory" name="firstCategory">
-							      <option>1차 카테고리 선택</option>
-							      <c:forEach items="${firstCategoryList }" var="categoryVO">
-							      	<option value="${categoryVO.cg_code }">${categoryVO.cg_name }</option>
+							
+						</div>
+						<div class="form-group row">
+							<label for="game_title" class="col-sm-2">게임명</label>
+							<div class="col-sm-4">
+							    <input type="text" class="form-control" name="game_title" id="game_title" placeholder="게임명 입력...">
+							</div>
+							<label for="game_price" class="col-sm-2">게임 가격</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="game_price" id="game_price" placeholder="상품가격 입력...">
+							</div>
+							
+						</div>
+						<div class="form-group row">
+							<label for="game_discount" class="col-sm-2">할인율</label>
+							<div class="col-sm-4">
+							    <input type="text" class="form-control" name="game_discount" id="game_discount" placeholder="할인율 입력...">
+							</div>
+							<label for="genre" class="col-sm-2">장르</label>							
+							<div class="col-sm-4">
+							    <select class="form-control" id="genre" name="genre">
+							      <option>장르 선택</option>
+							      <c:forEach items="${getGenre }" var="genreVO">
+							      	<option value="${genreVO.genre_code }">${genreVO.genre_name }</option>
 							      </c:forEach>							      
 							    </select>
-							</div>
-							<div class="col-sm-3">
-							    <select class="form-control" id="secondCategory" name="cg_code">
-							      <option>2차 카테고리 선택</option>
+							</div>			
+						</div>
+						<div class="form-group row">
+							<label for="platform" class="col-sm-2">플랫폼</label>							
+							<div class="col-sm-4">
+							    <select class="form-control" id="platform" name="platform">
+							      <option>플랫폼 선택</option>
+							      <c:forEach items="${getPlatform }" var="platformVO">
+							      	<option value="${platformVO.platform_code }">${platformVO.platform_name }</option>
+							      </c:forEach>							      
 							    </select>
-							</div>
-							
-						</div>
-						<div class="form-group row">
-							<label for="pro_name" class="col-sm-2">상품명</label>
+							</div>	
+							<label for="publisher" class="col-sm-2">퍼블리셔</label>							
 							<div class="col-sm-4">
-							    <input type="text" class="form-control" name="pro_name" id="pro_name" placeholder="상품명 입력...">
-							</div>
-							<label for="pro_price" class="col-sm-2">상품가격</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="pro_price" id="pro_price" placeholder="상품가격 입력...">
-							</div>
-							
-						</div>
-						<div class="form-group row">
-							<label for="title" class="col-sm-2">할인율</label>
-							<div class="col-sm-4">
-							    <input type="text" class="form-control" name="pro_discount" id="pro_discount" placeholder="상품명 입력...">
-							</div>
-							<label for="title" class="col-sm-2">제조사</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="pro_publisher" id="pro_publisher" placeholder="상품가격 입력...">
+							    <select class="form-control" id="publisher" name="publisher">
+							      <option>퍼블리셔 선택</option>
+							      <c:forEach items="${getPublisher }" var="publisherVO">
+							      	<option value="${publisherVO.publisher_code }">${publisherVO.publisher_name }</option>
+							      </c:forEach>							      
+							    </select>
 							</div>							
 						</div>
 						<div class="form-group row">
 							<label for="title" class="col-sm-2">상품 이미지</label>
 							<div class="col-sm-4">
-							    <input type="file" class="form-control" name="uploadFile" id="uploadFile" placeholder="상품명 입력...">
+							    <input type="file" class="form-control" name="uploadFile" id="uploadFile">
 							</div>
 							<label for="title" class="col-sm-2">미리보기 이미지</label>
 							<div class="col-sm-4">
@@ -118,19 +129,22 @@ desired effect
 							</div>							
 						</div>
 						<div class="form-group row">
-							<label for="title" class="col-sm-2">상품 설명</label>
+							<label for="game_description" class="col-sm-2">게임 설명</label>
 							<div class="col-sm-10">
-							    <textarea name="pro_content" id="pro_content" class="form-control" rows="3"></textarea>
+							    <textarea name="game_description" id="game_description" class="form-control" rows="3"></textarea>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="title" class="col-sm-2">수량</label>
+							<label for="game_language" class="col-sm-2">지원 언어</label>
 							<div class="col-sm-4">
-							    <input type="text" class="form-control" name="pro_amount" id="pro_amount" placeholder="상품명 입력...">
+							    <select class="form-control" id="game_language" name="game_language">
+							    	<option value="korean">한국어</option>
+							    	<option value="english">영어</option>
+							    </select>
 							</div>
-							<label for="title" class="col-sm-2">판매여부</label>
+							<label for="game_status" class="col-sm-2">판매여부</label>
 							<div class="col-sm-4">
-							    <select class="form-control" id="pro_buy" name="pro_buy">
+							    <select class="form-control" id="game_status" name="game_status">
 							      <option value="Y">판매가능</option>
 							      <option value="N">판매불가</option>
 							    </select>								
@@ -245,6 +259,9 @@ desired effect
 <script src="/bower_components/ckeditor/ckeditor.js"></script>
 <script>
 	$(document).ready(function(){
+
+		console.log()
+		
 		// ckeditor 환경설정. 자바스크립트 Ojbect문법
 	    var ckeditor_config = {
 	         resize_enabled : false,
@@ -256,22 +273,19 @@ desired effect
 	         filebrowserUploadUrl: '/admin/product/imageUpload'
 		}
 
-		CKEDITOR.replace("pro_content", ckeditor_config);
+		CKEDITOR.replace("game_description", ckeditor_config);
 
 		console.log("ckeditor 버전 : ", CKEDITOR.version);
 
 		//1차 카테고리 선택
-		$("#firstCategory").change(function(){
+		$("#genre").change(function(){
 			//$(this) : option 태그중 선택한 option태그를 가리킴
 			let cg_parent_code = $(this).val();
-
-			//console.log("1차 카테고리 코드", cg_parent_code);
-
-			//1차 카테고리 선택에 의한 2차카테고리 정보를 가져오는 url
-			let url = "/admin/category/secondCategory/" + cg_parent_code;// + ".json";
+			
+			let url = "/admin/category";// + ".json";
 
 			//$.getJSON : 스프링에 요청 시 데이터를 JSON으로 받는 기능
-			$.getJSON(url, function(secondCategoryList){
+			$.getJSON(url, function(CategoryList){
 				//console.log("2차카테고리 정보 : ",secondCategoryList);
 				//console.log("2차카테고리 갯수 : ", secondCategoryList.length+1);
 
