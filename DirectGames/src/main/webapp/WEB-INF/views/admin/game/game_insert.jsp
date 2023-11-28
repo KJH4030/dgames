@@ -67,7 +67,7 @@ desired effect
 					</div>
 					<!-- 절대경로 /board/register -->
 					<!-- <input type="file" 파일 업로드 시 enctype 필수 -->
-					<form role="form" method="post" action="/admin/game/game_insert" enctype="multipart/form-data">
+					<form role="form" method="post" action="/admin/game/game_insert" enctype="multipart/form-data">						
 						<div class="box-body">
 						<div class="form-group row">
 							
@@ -88,9 +88,9 @@ desired effect
 							<div class="col-sm-4">
 							    <input type="text" class="form-control" name="game_discount" id="game_discount" placeholder="할인율 입력...">
 							</div>
-							<label for="genre" class="col-sm-2">장르</label>							
+							<label for="genre_code" class="col-sm-2">장르</label>							
 							<div class="col-sm-4">
-							    <select class="form-control" id="genre" name="genre">
+							    <select class="form-control" id="genre_code" name="genre_code">
 							      <option>장르 선택</option>
 							      <c:forEach items="${getGenre }" var="genreVO">
 							      	<option value="${genreVO.genre_code }">${genreVO.genre_name }</option>
@@ -99,18 +99,18 @@ desired effect
 							</div>			
 						</div>
 						<div class="form-group row">
-							<label for="platform" class="col-sm-2">플랫폼</label>							
+							<label for="platform_code" class="col-sm-2">플랫폼</label>							
 							<div class="col-sm-4">
-							    <select class="form-control" id="platform" name="platform">
+							    <select class="form-control" id="platform_code" name="platform_code">
 							      <option>플랫폼 선택</option>
 							      <c:forEach items="${getPlatform }" var="platformVO">
 							      	<option value="${platformVO.platform_code }">${platformVO.platform_name }</option>
 							      </c:forEach>							      
 							    </select>
 							</div>	
-							<label for="publisher" class="col-sm-2">퍼블리셔</label>							
+							<label for="publisher_code" class="col-sm-2">퍼블리셔</label>							
 							<div class="col-sm-4">
-							    <select class="form-control" id="publisher" name="publisher">
+							    <select class="form-control" id="publisher_code" name="publisher_code">
 							      <option>퍼블리셔 선택</option>
 							      <c:forEach items="${getPublisher }" var="publisherVO">
 							      	<option value="${publisherVO.publisher_code }">${publisherVO.publisher_name }</option>
@@ -125,7 +125,7 @@ desired effect
 							</div>
 							<label for="title" class="col-sm-2">미리보기 이미지</label>
 							<div class="col-sm-4">
-								<img id="img_preview" style="width:200px; height:200px;">
+								<img id="img_preview" style="width:320px; height:150px;">
 							</div>							
 						</div>
 						<div class="form-group row">
@@ -276,34 +276,6 @@ desired effect
 		CKEDITOR.replace("game_description", ckeditor_config);
 
 		console.log("ckeditor 버전 : ", CKEDITOR.version);
-
-		//1차 카테고리 선택
-		$("#genre").change(function(){
-			//$(this) : option 태그중 선택한 option태그를 가리킴
-			let cg_parent_code = $(this).val();
-			
-			let url = "/admin/category";// + ".json";
-
-			//$.getJSON : 스프링에 요청 시 데이터를 JSON으로 받는 기능
-			$.getJSON(url, function(CategoryList){
-				//console.log("2차카테고리 정보 : ",secondCategoryList);
-				//console.log("2차카테고리 갯수 : ", secondCategoryList.length+1);
-
-				let secondCategory = $("#secondCategory");
-				let optionStr = "";
-				//<option value='10'>바지</option>	
-				
-				//find("css선택자")
-				secondCategory.find("option").remove();
-				secondCategory.append("<option value=''>2차 카테고리 선택</option>");
-				for(let i=0; i<secondCategoryList.length; i++){
-					optionStr += "<option value='" + secondCategoryList[i].cg_code + "'>" + secondCategoryList[i].cg_name + "</option>";
-				}
-				//console.log(optionStr);
-				secondCategory.append(optionStr);
-			});
-			
-		});
 
 		//파일 첨부시 이미지 미리보기
 		//파일첨부에 따른 이벤트 관련정보를 e라는 매개변수로 전달

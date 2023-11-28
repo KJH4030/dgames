@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dgames.domain.GameVO;
-import com.dgames.service.AdCategoryService;
+import com.dgames.service.AdProductService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 @RequiredArgsConstructor
 public class AdGameController {
 	
-	private final AdCategoryService adCategoryService;
+	private final AdProductService adProductService;
 	
 	//메인 및 썸네일 이미지 업로드 폴더경로 주입작업
 	@Resource(name="uploadPath") //servlet-context.xml bean id참조
@@ -44,7 +44,19 @@ public class AdGameController {
 	@PostMapping("/game_insert")
 	public String game_insert(GameVO vo, MultipartFile uploadFile) {
 		
-		return "";
+		//파일업로드 작업. 선수작업: FileUtils 클래스 작업
+		String dateFolder = FileUtils.getDateFolder();
+		String savedFileName = FileUtils.uploadFile(uploadPath, dateFolder, uploadFile);
+		
+		vo.setGame_img(savedFileName);
+		vo.setImg_up_folder(dateFolder);
+		
+		log.info("상품정보 : " + vo);
+		
+		//상품정보를 DB에 저장
+		adProductService.game_insert(vo);
+		
+		return "redirect:/admin/game/game_list"; //상품리스트 주소 이동
 	}
 	
 	//CkEditor 업로드 탭에서 파일업로드시 동작하는 매핑주소
