@@ -20,6 +20,7 @@
 	<resources mapping="/dist/**" location="/resources/dist/" />
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/image/**" location="/resources/image/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -35,7 +36,7 @@
 		<!-- 1024 * 1024 * 100 byte = 100mb -->
 		<beans:property name="maxUploadSize" value="104857560"/>
 		<!-- 1024 * 1024 * 2 byte = 2mb -->
-		<beans:property name="maxUploadSizePerFile" value="2097152"/>
+		<beans:property name="maxUploadSizePerFile" value="20971520"/>
 		<!-- 업로드 시 서버의 임시폴더 경로 -->
 		<beans:property name="uploadTempDir" value="file:/C:/dev/devTools/upload/temp" />
 		<!-- 업로드 시 서버의 메모리 사용 크기 설정 -->
@@ -52,5 +53,52 @@
 	</beans:bean>
 	
 	
+	<!-- 인터셉터 설정 -->
+	<!-- 연습용 -->
+	<!-- 
+	<beans:bean id="testInterceptor" class="com.dgames.interceptor.TestInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/test/testA"/>
+			<mapping path="/test/testB"/>
+			<beans:ref bean="testInterceptor"/>
+		</interceptor>
+	</interceptors>
+	 -->
+	
+	<!--  사용자 -->
+	<beans:bean id="userInterceptor" class="com.dgames.interceptor.UserInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+		
+			<!-- <mapping path="/member/*"/> -->
+			<!-- <exclude-mapping path=""/> -->
+		
+			<mapping path="/member/confirmPw"/>
+			<mapping path="/member/modify"/>
+			<mapping path="/member/mypage"/>
+			<mapping path="/member/delConfirmPw"/>
+			
+			<mapping path="/member/cart/*"/>
+			
+			<mapping path="/member/order/*"/>
+			
+			<beans:ref bean="userInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<!-- 관리자 -->
+	<beans:bean id="adminInterceptor" class="com.dgames.interceptor.AdminInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<exclude-mapping path="/admin/intro"/>
+			<exclude-mapping path="/admin/admin_ok"/>
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

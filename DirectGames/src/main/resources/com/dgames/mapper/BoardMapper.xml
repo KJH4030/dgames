@@ -112,6 +112,17 @@
 			ntc_id =#{ntc_id}
 	</select>
 	
+	<update id="ntc_viewcount" parameterType="Long">
+		
+		Update 
+			dg_notice
+        SET 
+        	ntc_views = ntc_views + 1
+        WHERE 
+        	ntc_id = #{ntc_id}
+	
+	</update>
+	
 	<update id="ntc_modify" parameterType="com.dgames.domain.NoticeVO">
 	
 		UPDATE 

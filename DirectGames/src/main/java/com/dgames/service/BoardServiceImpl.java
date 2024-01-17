@@ -39,6 +39,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public NoticeVO ntc_get(Long ntc_id) {
 
+		boardMapper.ntc_viewcount(ntc_id);
+		
 		return boardMapper.ntc_get(ntc_id);
 	}
 

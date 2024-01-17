@@ -21,19 +21,21 @@
     <!-- Favicons -->
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+      
+      .box-title{
+      
+      	margin: 30px 0;
+      
+      }
+      
+      label {
+      	font-size: 16px;
       }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
+      .footer{
+      
+     	position: absolute;
+     	bottom: 0;
       }
     </style>
 
@@ -148,7 +150,7 @@
   
 </div>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
-
+<%@ include file="/WEB-INF/views/comm/plugin.jsp" %>
   
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -244,7 +246,6 @@
     }
 </script>
 
-<%@ include file="/WEB-INF/views/comm/plugin.jsp" %>
 
 <script>
 	

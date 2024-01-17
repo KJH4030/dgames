@@ -70,9 +70,6 @@ desired effect
 					<form role="form" method="post" action="/admin/game/game_insert" enctype="multipart/form-data">						
 						<div class="box-body">
 						<div class="form-group row">
-							
-						</div>
-						<div class="form-group row">
 							<label for="game_title" class="col-sm-2">게임명</label>
 							<div class="col-sm-4">
 							    <input type="text" class="form-control" name="game_title" id="game_title" placeholder="게임명 입력...">
@@ -158,7 +155,7 @@ desired effect
 							</div>
 							<div class="text-center">
 								<button type="submit" class="btn btn-primary">상품등록</button>
-								<button type="reset" class="btn btn-primary">취소</button>
+								<input type="button" id="reset" class="btn btn-primary" value="취소">
 							</div>
 						</div>
 					</form>
@@ -270,7 +267,7 @@ desired effect
 	         toolbarCanCollapse : true,
 	         removePlugins : "elementspath", 
 	         //업로드 탭기능추가 속성. CKEditor에서 파일업로드해서 서버로 전송클릭하면 , 이 주소가 동작된다.
-	         filebrowserUploadUrl: '/admin/product/imageUpload'
+	         filebrowserUploadUrl: '/admin/game/imageUpload'
 		}
 
 		CKEDITOR.replace("game_description", ckeditor_config);
@@ -292,7 +289,10 @@ desired effect
 			}
 			
 		});
-		
+
+		 $("#reset").on("click", function() {
+			location.href="/admin/game/game_list";
+		 });
 	});
 
 	

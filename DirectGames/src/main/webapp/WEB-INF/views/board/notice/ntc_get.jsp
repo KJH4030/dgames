@@ -63,6 +63,12 @@
 	.box{
 		font-size: 14px;
 	}
+
+    .footer{
+    
+	   	position: absolute;
+	   	bottom: 0;
+    }
     </style>
 
     
@@ -73,6 +79,7 @@
     
 <header>
   <!-- Fixed navbar -->
+<%@include file="/WEB-INF/views/comm/plugin2.jsp" %>
   <%@include file="/WEB-INF/views/comm/header.jsp" %>
 </header>
 
@@ -127,9 +134,12 @@
 						<input type="hidden" name="type" id="type" value="${cri.type}" />
 						<input type="hidden" name="keyword" id="keyword" value="${cri.keyword}" />
 						<input type="hidden" name="ntc_id" id="ntc_id" value="${notice.ntc_id }" />
-					</form>	
-					<button type="button" id="btn_modify" class="btn btn-primary">Modify</button>
-					<button type="button" id="btn_delete" class="btn btn-primary">Delete</button>
+					</form>
+					
+  					<c:if test="${sessionScope.loginStatus.dgm_id == 'admin'}">
+						<button type="button" id="btn_modify" class="btn btn-primary">Modify</button>
+						<button type="button" id="btn_delete" class="btn btn-primary">Delete</button>
+					</c:if>
 					<button type="button" id="btn_list" class="btn btn-primary">List</button>
 					</div>	
     		</div>	
@@ -138,9 +148,7 @@
   </div>
 </main>
 
-<footer class="footer mt-auto py-3">
   <%@include file="/WEB-INF/views/comm/footer.jsp" %>
-</footer>
 <%@include file="/WEB-INF/views/comm/plugin.jsp" %>
    
   <script>

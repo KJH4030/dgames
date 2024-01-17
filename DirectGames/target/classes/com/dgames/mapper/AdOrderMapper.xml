@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.AdOrderMapper">
+
+	<!-- 공통된 sql구문작업 : 검색조건.   -->
+	<!-- 검색기능을 사용하지 않으면,  -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="cri.typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="cri.type == 'N'.toString()">
+                            ORD_NAME like '%' || #{cri.keyword} || '%'
+						</when>
+						<when test="cri.type == 'C'.toString()">
+                            ORD_CODE like '%' || #{cri.keyword} || '%'
+						</when>					
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	
+	</sql>
+	
+	<sql id="period">
+		
+		<if test="start_date != null and !start_date.equals('')">
+			<![CDATA[
+				ORD_REGDATE >= to_date(#{start_date}) AND ORD_REGDATE <  to_date(#{end_date})  + 1 AND
+			]]>
+		</if>
+	</sql>
+	
+	
+	<!--  CDATA 섹션 -->
+	<select id="order_list" resultType="com.dgames.domain.OrderVO" parameterType="map">
+		<![CDATA[
+		select 
+    		ORD_CODE, DGM_ID, ORD_NAME, ORD_ZIPCODE, ORD_ADDR_BASIC, ORD_ADDR_DETAIL, ORD_TEL, ORD_PRICE, ORD_REGDATE, ORD_STATUS, PAYMENT_STATUS
+		from 
+		    (
+		    select /*+INDEX_DESC(ORDER_TBL PK_ORDER_TBL) */
+		        rownum rn, ORD_CODE, DGM_ID, ORD_NAME, ORD_ZIPCODE, ORD_ADDR_BASIC, ORD_ADDR_DETAIL, ORD_TEL, ORD_PRICE, ORD_REGDATE, ORD_STATUS, PAYMENT_STATUS
+		    from 
+		        ORDER_TBL
+		    where 
+		    ]]>
+		    
+		    <include refid="criteria"></include>
+		    <include refid="period"></include>
+		    
+		    
+		    <![CDATA[
+		        rownum <= #{cri.pageNum} * #{cri.amount}
+		    )
+		where 
+		    rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from ORDER_TBL where
+		
+		<include refid="criteria"></include>
+		<include refid="period"></include>
+		
+		ORD_CODE > 0
+	</select>
+	
+	<select id="orderDetailInfo1" parameterType="Long" resultType="com.dgames.domain.OrderDetailInfoVO">
+		
+		SELECT 
+			OT.ORD_CODE, OT.GAME_ID,  D.GAME_TITLE, D.GAME_PRICE, D.GAME_PRICE as ORD_PRICE, D.IMG_UP_FOLDER, D.GAME_IMG   
+		FROM 
+			ORDETAIL_TBL OT, DG_GAMES D
+		WHERE 
+			OT.GAME_ID = D.GAME_ID
+		AND 
+			OT.ORD_CODE = #{ord_code}
+	
+	</select>
+	
+	<!-- resultType을 사용하지 않고, resultMap을 사용한 경우 -->
+	<!-- 클래스안에 다른클래스가 필드로 사용이 된 경우 -->
+	<select id="orderDetailInfo2" parameterType="Long" resultMap="orderDetailProductMap">
+		
+		SELECT 
+			OT.ORD_CODE, OT.GAME_ID,  D.GAME_TITLE, D.GAME_PRICE, D.GAME_PRICE as ORD_PRICE, D.IMG_UP_FOLDER, D.GAME_IMG   
+		FROM 
+			ORDETAIL_TBL OT, DG_GAMES D
+		WHERE 
+			OT.GAME_ID = D.GAME_ID
+		AND 
+			OT.ORD_CODE = #{ord_code}
+	
+	</select>
+	
+	<!--  OrderDetailGameVO 클래스를 나타내는 의미 -->
+	<resultMap type="com.dgames.domain.OrderDetailGameVO" id="orderDetailProductMap">
+		<collection property="orderDetailVO" resultMap="orderDetailMap"></collection>
+		<collection property="gameVO" resultMap="gameMap"></collection>
+	</resultMap>
+	
+	<!-- resultMap : 테이블의 컬럼명과 클래스의 필드명이 다를경우 매핑하는 목적. -->
+	
+	<!-- orderDetailVO필드에서 필요한 정보  -->
+	<resultMap type="com.dgames.domain.OrderDetailVO" id="orderDetailMap">
+		<id property="ord_code" column="ord_code"/>
+		<id property="game_id" column="game_id"/>
+		<result property="dt_price" column="dt_price"/>
+	</resultMap>
+	
+	<!-- gameVO필드에서 필요한 정보 -->
+	<resultMap type="com.dgames.domain.GameVO" id="gameMap">
+		<id property="game_id" column="game_id"/>
+		
+		<result property="platform_code" column="platform_code"/>
+		<result property="genre_code" column="genre_code"/>
+		<result property="publisher_code" column="publisher_code"/>
+		<result property="game_title" column="game_title"/>
+		<result property="game_price" column="game_price"/>
+		<result property="game_discount" column="game_discount"/>
+		<result property="game_description" column="game_description"/>
+		<result property="game_language" column="game_language"/>
+		<result property="img_up_folder" column="img_up_folder"/>
+		<result property="game_img" column="game_img"/>
+		<result property="game_status" column="game_status"/>
+		<result property="release_date" column="release_date"/>
+	
+	</resultMap>
+	
+	<!-- 테이블의 컬럼명과 클래스의 필드명이 다른경우 -->
+
+
+	<delete id="order_game_delete" parameterType="map">
+	
+		DELETE FROM
+			ORDETAIL_TBL
+		WHERE
+			ORD_CODE = #{ord_code} AND GAME_ID = #{game_id}
+	</delete>
+
+
+
+
+
+
+
+</mapper>  

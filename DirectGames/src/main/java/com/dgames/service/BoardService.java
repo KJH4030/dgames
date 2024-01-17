@@ -15,9 +15,11 @@ public interface BoardService {
 	int ntc_count(Criteria cri);
 
 	NoticeVO ntc_get(Long ntc_id);
-
-	public void ntc_modify(NoticeVO notice);
 	
-	public void ntc_delete(Long ntc_id);
+	void ntc_modify(NoticeVO notice);
+	
+	void ntc_delete(Long ntc_id);
+	
+	
 	
 }

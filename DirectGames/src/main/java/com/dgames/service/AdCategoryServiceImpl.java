@@ -32,18 +32,17 @@ public class AdCategoryServiceImpl implements AdCategoryService {
 	}
 	*/
 	@Override
-	public List<GenreVO> getGenre() {		
+	public List<GenreVO> getGenre() {
 		return adCategoryMapper.getGenre();
 	}
+
 	@Override
 	public List<PlatformVO> getPlatform() {
 		return adCategoryMapper.getPlatform();
 	}
+
 	@Override
 	public List<PublisherVO> getPublisher() {
 		return adCategoryMapper.getPublisher();
 	}
-
-	
-	
 }

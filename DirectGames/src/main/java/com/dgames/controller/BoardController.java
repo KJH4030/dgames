@@ -127,6 +127,7 @@ public class BoardController {
 	public void ntc_list(Criteria cri, Model model) {
 		
 		log.info("list : " + cri);
+		cri.setAmount(10);
 		
 		//1)목록 데이터
 		List<NoticeVO> ntc_list = boardService.ntc_list(cri);

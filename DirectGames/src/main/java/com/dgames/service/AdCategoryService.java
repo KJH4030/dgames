@@ -8,7 +8,6 @@ import com.dgames.domain.PublisherVO;
 
 public interface AdCategoryService {
 	
-
 	List<GenreVO> getGenre();
 	List<PlatformVO> getPlatform();
 	List<PublisherVO> getPublisher();

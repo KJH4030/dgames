@@ -86,8 +86,7 @@ public class AdminController {
 	
 	//관리자 메뉴 페이지
 	@GetMapping("/ad_menu")
-	public void admin_menu() {
-		
+	public void ad_menu() {
 		
 	}
 	

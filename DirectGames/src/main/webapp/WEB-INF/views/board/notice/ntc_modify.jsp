@@ -38,6 +38,12 @@
           font-size: 3.5rem;
         }
       }
+
+      .footer{
+      
+     	position: absolute;
+     	bottom: 0;
+      }
     </style>
 
     
@@ -48,6 +54,7 @@
     
 <header>
   <!-- Fixed navbar -->
+<%@include file="/WEB-INF/views/comm/plugin2.jsp" %>
   <%@include file="/WEB-INF/views/comm/header.jsp" %>
 </header>
 
@@ -92,9 +99,7 @@
   </div>
 </main>
 
-<footer class="footer mt-auto py-3">
   <%@include file="/WEB-INF/views/comm/footer.jsp" %>
-</footer>
 <%@include file="/WEB-INF/views/comm/plugin.jsp" %>
      <script src="/resources/ckeditor/ckeditor.js"></script>      
 <script>

@@ -17,9 +17,11 @@ public interface BoardMapper {
 	
 	NoticeVO ntc_get(Long ntc_id);
 	
-	public void ntc_modify(NoticeVO notice);
+	void ntc_viewcount(Long ntc_id);
 	
-	public void ntc_delete(Long ntc_id);
+	void ntc_modify(NoticeVO notice);
+	
+	void ntc_delete(Long ntc_id);
 	
 	
 }

@@ -13,9 +13,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Direct Games</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<%@ include file="/WEB-INF/views/board/include/plugin1.jsp" %>
-<%@ include file="/WEB-INF/views/board/include/plugin2.jsp" %>
-<%@ include file="/WEB-INF/views/comm/plugin.jsp" %>
+<%@ include file="/WEB-INF/views/comm/plugin2.jsp" %>
+
+	<style>
+	
+	.wrapper{
+		width: 1120px;
+		margin: 0 auto;
+		font-size : 14px;
+		text-align: center;
+	}
+	th {
+		color: white;
+		background : #6f4e43;
+	}
+	.pagination{
+		margin-left : 20%;
+	}
+    .footer{
+    
+   	position: absolute;
+   	bottom: 0;
+    }
+	</style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -37,52 +57,23 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="">
+<%@ include file="/WEB-INF/views/comm/header.jsp" %>
+<%@include file="/WEB-INF/views/comm/category_menu.jsp" %>
 <div class="wrapper">
 
   <!-- Main Header -->
-<%@ include file="/WEB-INF/views/comm/header.jsp" %>
   <!-- Left side column. contains the logo and sidebar -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Page Header
-        <small>Optional description</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
-    </section>
-
     <!-- Main content -->
     <section class="content container-fluid">
     	<div class="row">
     		<div class="col-md-12">
     			<div class="box">
-					<div class="box-header with-border">
-					<h3 class="box-title">Product List</h3>
-					</div>
-
 					<div class="box-body">
-						<div>							
-							<form action="/board/notice/ntc_list" method="get" >
-								<select name="type">
-									<option selected>검색종류선택</option>
-									<option value="T" ${pageMaker.cri.type == 'T'? 'selected': ''}>제목</option>
-									<option value="C" ${pageMaker.cri.type == 'C'? 'selected': ''}>내용</option>
-									<option value="TC" ${pageMaker.cri.type == 'TC'? 'selected': ''}>제목+내용</option>
-									
-								</select>
-								<input type="text" name="keyword" value="${pageMaker.cri.keyword}" />
-								<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}" />
-								<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
-								<button type="submit" class="btn btn-primary">검색</button>
-							</form>
-						</div>
 						<table class="table table-bordered">
 							<tbody>
 							<tr>
@@ -102,13 +93,13 @@ desired effect
 								<td><fmt:formatDate value="${noticeVO.ntc_regdate }" pattern="yyyy-MM-dd" /></td>
 								<td>${noticeVO.ntc_views }</td>
 							</tr>								
-							</c:forEach>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 					<div class="box-footer clearfix">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="">
 								<!--1)페이지번호 클릭할 때 사용  [이전] 1 2 3 4 5 [다음]  action="/board/list"-->
 								<!--2)목록에서 상품이지미 또는 상품명을 클릭할 때 동작  action="/board/get" -->
 								<form id="actionForm" action="" method="get">
@@ -119,7 +110,21 @@ desired effect
 									<input type="hidden" name="ntc_id" id="ntc_id" />
 								</form>
 							</div>
-							<div class="col-md-8 text-center">								
+							<div class="col-md-4">							
+								<form action="/board/notice/ntc_list" method="get" >
+									<input type="text" name="keyword" value="${pageMaker.cri.keyword}" />
+									<select name="type">
+										<option selected>검색종류선택</option>
+										<option value="T" ${pageMaker.cri.type == 'T'? 'selected': ''}>제목</option>
+										<option value="C" ${pageMaker.cri.type == 'C'? 'selected': ''}>내용</option>
+										<option value="TC" ${pageMaker.cri.type == 'TC'? 'selected': ''}>제목+내용</option>										
+									</select>
+									<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}" />
+									<input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
+									<button type="submit" class="btn btn-primary">검색</button>
+								</form>
+							</div>
+							<div class="col-md-6">								
 								<nav aria-label="...">
 								<ul class="pagination">
 									<!-- 이전 표시여부 -->
@@ -147,9 +152,11 @@ desired effect
 								</ul>
 								</nav>
 							</div>
+  							<c:if test="${sessionScope.loginStatus.dgm_id == 'admin'}">
 							<div class="col-md-2 text-right"> 
 								<button type="button" class="btn btn-primary" role="button" id="btn_ntc_regist">공지사항 등록</button>
-							</div>	
+							</div>
+							</c:if>	
 						</div>
 						
 					</div>
@@ -165,7 +172,9 @@ desired effect
 
   <!-- Main Footer -->
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+
+<%@include file="/WEB-INF/views/comm/footer.jsp" %>
+<%@include file="/WEB-INF/views/comm/plugin.jsp" %>
 
 <!-- ./wrapper -->
 
@@ -188,14 +197,14 @@ desired effect
 		});
 
 
-		//상품등록 버튼 페이지 이동
+		//공지사항등록 버튼 페이지 이동
 		$("#btn_ntc_regist").on("click", function(){
 			location.href = "/board/notice/ntc_regist";
 		});
 
 
 
-		//게시글 읽기
+		//게시글 수정
 		$("button[name='btn_pro_edit']").on("click", function(){
 
 			//수정 상품코드
@@ -215,6 +224,7 @@ desired effect
 		
 	});//ready
 
+	//게시글 읽기
 	const moves = document.getElementsByClassName("move");
 	Array.from(moves).forEach(function(move) {
 		// actionForm폼 전송

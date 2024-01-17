@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.UserGameMapper">
+
+	<!--  CDATA 섹션 -->
+	<select id="game_list" resultType="com.dgames.domain.GameVO" parameterType="com.dgames.dto.Criteria">
+		<![CDATA[
+		SELECT     		
+    		game_id, 
+    		platform_code, 
+    		game_title, 
+    		genre_code, 
+    		game_price, 
+    		game_discount, 
+    		publisher_code, 
+    		game_description, 
+    		game_language, 
+    		img_up_folder, 
+    		game_img, 
+    		game_status, 
+    		release_date
+		FROM 
+		    (
+		    select /*+INDEX_DESC(dg_games pk_game_id) */
+			    rownum rn, 
+	    		game_id, 
+	    		platform_code, 
+	    		game_title, 
+	    		genre_code, 
+	    		game_price, 
+	    		game_discount, 
+	    		publisher_code, 
+	    		game_description, 
+	    		game_language, 
+	    		img_up_folder, 
+	    		game_img, 
+	    		game_status, 
+	    		release_date
+		    FROM
+		        dg_games
+		    WHERE
+		    	game_status = 'Y'
+	    	AND
+		        rownum <= #{pageNum} * #{amount}
+		    )
+		WHERE 
+		    rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT 
+			count(*) 
+		FROM 
+			dg_games
+		WHERE
+			game_status = 'Y'
+	</select>
+	
+	<!-- 게임상세 -->
+	<select id="game_detail" parameterType="Integer" resultType="com.dgames.domain.GameVO">
+	
+		SELECT			     		
+    		game_id, 
+    		platform_code, 
+    		game_title, 
+    		genre_code, 
+    		game_price, 
+    		game_discount, 
+    		publisher_code, 
+    		game_description, 
+    		game_language, 
+    		img_up_folder, 
+    		game_img, 
+    		game_status, 
+    		release_date 
+		FROM 
+			dg_games 
+		WHERE
+			game_id = #{game_id}	
+	
+	</select>
+	
+	<!-- 게임카테고리 -->
+	<select id="getGenre" parameterType="Integer" resultType="com.dgames.domain.GenreVO">	
+		SELECT 
+			genre_code,
+			genre_name
+		FROM 
+			genre_tbl
+		WHERE
+			genre_code = #{genre_code}		
+	</select>
+	<select id="getPublisher" parameterType="Integer" resultType="com.dgames.domain.PublisherVO">	
+		SELECT 
+			publisher_code,
+			publisher_name
+		FROM 
+			publisher_tbl
+		WHERE
+			publisher_code = #{publisher_code}		
+	</select>
+	<select id="getPlatform" parameterType="Integer" resultType="com.dgames.domain.PlatformVO">	
+		SELECT 
+			platform_code,
+			platform_name
+		FROM 
+			platform_tbl
+		WHERE
+			platform_code = #{platform_code}		
+	</select>
+
+</mapper>  

@@ -17,6 +17,27 @@
 <!-- header -->
 <%@ include file="/WEB-INF/views/comm/header.jsp" %>
 <meta charset="UTF-8">
+
+<style>
+
+      .footer{
+      
+     	position: absolute;
+     	bottom: 0;
+      }
+      
+      label {
+      	font-size: 16px;
+      }
+      
+      .box-title{
+      
+      	margin: 30px 0;
+      
+      }
+
+</style>
+
 <title>Direct Games</title>
 </head>
 <body>
@@ -52,6 +73,8 @@
 	<!-- footer -->
   
 </div>
+<%@include file="/WEB-INF/views/comm/footer.jsp" %>
+<%@include file="/WEB-INF/views/comm/plugin.jsp" %>
     <script>
         let msg = '${msg}';
         if(msg != ""){

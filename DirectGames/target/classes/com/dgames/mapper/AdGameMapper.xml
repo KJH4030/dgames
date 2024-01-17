@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.AdGameMapper">
+	
+	<insert id="game_insert" parameterType="com.dgames.domain.GameVO">
+		INSERT INTO
+			DG_GAMES(
+				game_id,
+				platform_code, 
+				game_title, 
+				genre_code, 
+				game_price, 
+				game_discount, 
+				publisher_code, 
+				game_description, 
+				game_language, 
+				img_up_folder, 
+				game_img, 
+				game_status
+			)
+		VALUES(
+			seq_game_id.NEXTVAL,
+			#{platform_code},
+			#{game_title},
+			#{genre_code},
+			#{game_price},
+			#{game_discount},
+			#{publisher_code},
+			#{game_description},
+			#{game_language},
+			#{img_up_folder},
+			#{game_img},
+			#{game_status}
+		)
+	</insert>
+	
+	
+	<!-- 공통된 sql구문작업 : 검색조건 -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+                            game_title like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'C'.toString()">
+                            game_id	 like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	
+	</sql>
+	
+	
+	<!--  CDATA 섹션 /*+INDEX */ 인덱스 힌트--> 
+	<select id="game_list" resultType="com.dgames.domain.GameVO" parameterType="com.dgames.dto.Criteria">
+		<![CDATA[
+		SELECT
+    		game_id, 
+    		platform_code, 
+    		game_title, 
+    		genre_code, 
+    		game_price, 
+    		game_discount, 
+    		publisher_code, 
+    		game_description, 
+    		game_language, 
+    		img_up_folder, 
+    		game_img, 
+    		game_status, 
+    		release_date
+		FROM 
+		    (
+		    select /*+INDEX_DESC(dg_games pk_game_id) */
+			    rownum rn, 
+	    		game_id, 
+	    		platform_code, 
+	    		game_title, 
+	    		genre_code, 
+	    		game_price, 
+	    		game_discount, 
+	    		publisher_code, 
+	    		game_description, 
+	    		game_language, 
+	    		img_up_folder, 
+	    		game_img, 
+	    		game_status, 
+	    		release_date
+		    FROM
+		        dg_games
+		    WHERE 
+		    ]]>
+		    
+		    <include refid="criteria"></include>
+		    
+		    <![CDATA[
+		        rownum <= #{pageNum} * #{amount}
+		    )
+		WHERE 
+		    rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM dg_games WHERE
+		
+		<include refid="criteria"></include>
+		
+		game_id > 0
+	</select>
+	
+	<!-- 체크상품 수정작업 -->
+	<update id="game_checked_modify1" parameterType="Map">
+	
+		UPDATE 
+			dg_games 
+		SET 
+			game_price = #{game_price}, 
+			game_status = #{game_status} 
+		WHERE 
+			game_id = #{game_id}
+	
+	</update>
+	
+	<update id="game_checked_modify2">
+	
+		<foreach collection="list" item="item" open="declare begin" separator=";" close="; end;">
+		
+			UPDATE 
+				dg_games 
+			SET 
+				game_price = #{item.game_price}, 
+				game_status = #{item.game_status} 
+			WHERE 
+				game_id = #{item.game_id}
+		
+		</foreach>
+	
+	
+	</update>
+	
+
+	<select id="game_edit" resultType="com.dgames.domain.GameVO" parameterType="Integer">
+	
+		SELECT 			
+    		game_id, 
+    		platform_code, 
+    		game_title, 
+    		genre_code, 
+    		game_price, 
+    		game_discount, 
+    		publisher_code, 
+    		game_description, 
+    		game_language, 
+    		img_up_folder, 
+    		game_img, 
+    		game_status, 
+    		release_date
+		FROM 
+			dg_games 
+		WHERE 
+			game_id = #{game_id}
+	
+	</select>
+	
+	<!-- 상품수정 -->
+	<update id="game_edit_ok" parameterType="com.dgames.domain.GameVO">
+	
+		UPDATE 
+			dg_games 
+		SET  			
+    		platform_code = #{platform_code}, 
+    		game_title = #{game_title}, 
+    		genre_code = #{genre_code}, 
+    		game_price = #{game_price}, 
+    		game_discount = #{game_discount}, 
+    		publisher_code = #{publisher_code}, 
+    		game_description = #{game_description}, 
+    		game_language = #{game_language}, 
+    		img_up_folder = #{img_up_folder}, 
+    		game_img = #{game_img}, 
+    		game_status = #{game_status}
+		WHERE 
+			game_id =  #{game_id}
+	
+	</update>
+	
+	<delete id="game_delete" parameterType="Integer">
+	
+		DELETE FROM
+			dg_games
+		WHERE 
+			game_id =  #{game_id}		
+	
+	</delete>
+	
+</mapper>

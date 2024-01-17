@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgames.mapper.CartMapper">
+
+	<select id="cart_check" parameterType="map" resultType="Integer">
+		SELECT 
+			cart_code
+		FROM
+			cart_tbl
+		WHERE
+			game_id = #{game_id}
+		AND
+			dgm_id = #{dgm_id}
+	</select>
+
+	<insert id="cart_add" parameterType="com.dgames.domain.CartVO">
+		
+    	INSERT INTO
+    		cart_tbl    		
+    		(cart_code,
+    		 game_id, 
+    		 dgm_id
+			)
+    	values
+    		(seq_cart_code.nextval,
+    		#{game_id},
+    		#{dgm_id}
+			)
+	
+	
+	</insert>
+	
+	<select id="cart_list" resultType="com.dgames.dto.CartDTOList">
+	
+		SELECT  
+			C.CART_CODE, C.game_id,G.GAME_TITLE, G.GAME_PRICE, G.GAME_IMG, G.GAME_DISCOUNT, G.IMG_UP_FOLDER 
+		FROM 
+			dg_games G INNER JOIN CART_TBL C 
+		ON 
+			G.game_id = C.game_id
+		WHERE 
+			C.dgm_ID = #{dgm_id}
+	
+	</select>
+	
+	<delete id="cart_list_del" parameterType="Long">
+	
+		DELETE FROM
+			CART_TBL
+		WHERE
+			CART_CODE = #{cart_code}			
+	
+	</delete>
+	
+	<delete id="cart_sel_delete">
+	<!--  파라미터로 List컬렉션이 사용될 경우에는 mybatis 구문에서는 collection="list" 사용해야 함. -->
+		DELETE FROM 
+			CART_TBL
+		WHERE
+			CART_CODE IN
+			<foreach collection="list" item="cart_code" open="(" close=")" separator=",">
+				#{cart_code}
+			</foreach>
+	
+	</delete>
+
+	<!-- 장바구니 비우기 -->
+	<delete id="cart_empty">
+		TRUNCATE TABLE
+			CART_TBL
+	</delete>
+</mapper>  

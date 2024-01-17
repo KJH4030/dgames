@@ -36,6 +36,22 @@
           font-size: 3.5rem;
         }
       }
+      
+      .box-title{
+      
+      	margin: 30px 0;
+      
+      }
+      
+      label {
+      	font-size: 16px;
+      }
+
+      .footer{
+      
+     	position: absolute;
+     	bottom: 0;
+      }
     </style>
 
     <script>
@@ -113,10 +129,11 @@
   </div>
 	</div>
 
-	<!-- footer -->
-  <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
   
 </div>
+
+<!-- footer -->
+<%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 
   
 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
